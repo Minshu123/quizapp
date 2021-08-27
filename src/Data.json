@@ -1,0 +1,25 @@
+ [
+     
+     {
+       "id": 1,
+       "question": "Q1: What does HTML stand for?",
+       "options":[{"id":1,"text":"HyperText Markup Language"},{"id":2,"text":"Hyperlinks Text Markup Language"},{"id":3,"text":"Home Tool Markup Language"},{"id":4,"text":"HyperText Makeup Language"}] ,
+       "ans":"HyperText Markup Language",
+       "type": "radio"
+       
+     },
+     {
+       "id": 2,
+       "question": "Q2: Inside which HTML element do we put the JavaScript?",
+       "type": "text",
+       "ans": "yes"
+      
+     },
+     {
+       "id":3,
+       "question": "Q3: What does CSS stand for?",
+       "options":[{"id":1,"text":"Computer Style Sheet"},{"id":2,"text":"Cascading Style Sheet"},{"id":3,"text":"Colorful Style Sheet"},{"id":4,"text":"Creative Style Sheet"}] ,
+       "ans":["Cascading Style Sheet","Computer Style Sheet"],
+       "type": "checkbox"
+     }
+]

@@ -1,0 +1,92 @@
+.quiz {
+  background-color: gray;
+  width: fit-content;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  border-radius: 10px;
+  border: solid rgb(51, 51, 49) 5px;
+  box-shadow: 5px 10px rgb(99, 91, 91, 0.5);
+  min-width: 800px;
+  min-height: 450px;
+}
+.question-part {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+.question-part > h3 {
+  padding: 10px;
+}
+.answer-part {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+.answer-part > button {
+  min-width: 100px;
+  padding: 10px;
+  margin-left: 10px;
+  border-radius: 5px;
+}
+.buttn_first {
+  margin-top: 10px;
+  border-top: 1px solid black;
+}
+.buttn_first > button,
+.buttn_submit > button {
+  margin: 10px;
+  min-width: 100px;
+  padding: 10px;
+  border-radius: 10px;
+}
+.answer-part > button:hover {
+  background-color: #24a0ed;
+}
+.answer-part > input:hover {
+  background-color: rgb(221, 219, 219);
+}
+.buttn_first > button:hover,
+.buttn_submit > button:hover {
+  background-color: #5cb85c;
+}
+.answer-part > input {
+  outline: none;
+  border: none;
+  height: 35px;
+  border-radius: 10px;
+  width: 300px;
+  padding: 25px;
+  margin-left: 10px;
+  font-weight:600;
+}
+.answer-part>button>span{
+    font-weight: 800;
+}
+
+.buttongroup {
+  position: relative;
+  right: 0;
+  bottom: 0;
+}
+
+.checkboxform {
+  padding: 10px;
+}
+.checkboxform > button {
+  margin-top: 10px;
+  min-width: 100px;
+  padding: 10px;
+  border-radius: 10px;
+}
+.checkboxforminside{
+    padding:10px;
+}
+.checkboxforminside>span{
+    padding:10px;
+    font-weight: 800;
+}
+.checkboxform>button:hover{
+    background-color: #24a0ed;
+}
