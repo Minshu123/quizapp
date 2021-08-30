@@ -2,6 +2,10 @@ import React,{useState} from 'react'
 import quest from "./Data.json"
 import { useHistory } from 'react-router'
 import "./Quiz.css"
+import hold from "./Hold"
+import RadioComponent from './RadioComponent'
+import TextComponent from './TextComponent'
+
 const Quiz = () => {
 
     const [index, setindex] = useState(0)
@@ -113,7 +117,10 @@ const Quiz = () => {
         console.log(e.target.value)
         
     }
-
+    const radiocheck=()=>
+    {
+        
+    }
 
 
 
@@ -130,9 +137,21 @@ const Quiz = () => {
             </div>
             <div className="answer-part">
                 {(quest[index].type=="radio")?(quest[index].options.map((answeroption)=>(
-                    
-                    <button onClick={checktextradiobox} value={answeroption.text}><span>{answeroption.text}</span></button>
-               ))):
+                    // if(hold.arr[index].response==answeroption.text)
+                    // {
+                    //     return <input type="radio"  name={ quest[index].ans} value={answeroption.text}/>
+                    // }
+                    // else 
+                    // {
+                    //     return <input type="radio"  name={ quest[index].ans} value={answeroption.text}/>
+                    // }
+                   // <RadioComponent name={quest[index].ans} value={answeroption.text} insidevalue={answeroption.text} index={index}/>
+                    <div>
+                        <input type="radio" name={ quest[index].ans} value={answeroption.text}/>
+                        <label for="html">{answeroption.text}</label><br></br>
+                    </div>
+                   
+                ))):
                 (quest[index].type=="text"?(
                     <input type="text" name="answer" onChange={checktextradiobox}  placeholder="Enter your answer"
                 />
