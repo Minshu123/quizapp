@@ -1,9 +1,0 @@
-.RadioComp > button {
-    min-width: 100px;
-    padding: 10px;
-    margin-left: 10px;
-    border-radius: 5px;
-  }
-  .RadioComp > button:hover {
-    background-color: #24a0ed;
-  }

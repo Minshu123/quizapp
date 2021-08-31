@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import quest from "./Data.json";
 import { useHistory } from "react-router";
 import "./Quiz.css";
+import hold from "./Hold";
+import RadioComponent from "./RadioComponent";
+import TextComponent from "./TextComponent";
 const Quiz = () => {
   const [state, setState] = useState({
     answers: {},
@@ -17,71 +20,82 @@ const Quiz = () => {
     }
     return array;
   });
-  
+  const setarray = (check, ind) => {
+    var array = new Array(quest.length);
+    for (let i = 0; i < quest.length; i++) {
+      array[i] = resultarray[i];
+    }
+    array[ind] = check;
+    setresultarray(array);
+  };
+  const getresultscore = () => {
+    let count = 0;
+    for (let i = 0; i < quest.length; i++) {
+      if (resultarray[i]) {
+        count++;
+      }
+    }
+    setscore(count);
+  };
   const increaseIndex = () => {
     if (index < quest.length - 1) {
       setindex(index + 1);
     }
   };
-
   const decreaseIndex = () => {
     if (index > 0) {
       setindex(index - 1);
     }
   };
-
-  const getresultscore = () => {
-    let count = 0;
-    for (let i = 0; i < quest.length; i++) {
-        if(quest[i].type==="radio"||quest[i].type==="text")
-        {
-            if(state.answers[i]===quest[i].ans)
-            {
-              count++;
-            }
-        }
-        else 
-        {
-            let ginti=0;
-            let tem;
-            let flag=true;
-            for(let j=0;j<quest[i].ans.length;j++)
-            {
-                tem=""+quest[i].ans[j];
-                // console.log(tem)
-                // console.log(state.answers[i][tem])
-                
-                if(state.answers[i][tem]==undefined||state.answers[i][tem]===false)
-                {
-                  flag=false;
-                  break;
-                }
-                else 
-                {
-                    ginti++;
-                }
-            }
-            if(flag&&ginti==quest[i].ans.length)
-            {
-                count++;
-            }
-        }
-    }
-    console.log("count is "+count)
-    setscore(count);
-    console.log(score);
-  };
-
   const finalscore = () => {
     getresultscore();
     setshowscore(true);
+  };
+  const checkcheckbox = e => {
+    e.preventDefault();
+    var set = new Set();
+    for (let i in quest[index].ans) {
+      set.add(quest[index].ans[i]);
+    }
+    var check = true;
+    var count = 0;
+    for (let i = 0; i < quest[index].options.length; i++) {
+      var flag = document.getElementById(quest[index].options[i].id);
+      var value = document.getElementById(quest[index].options[i].id).value;
+      if (flag.checked == true) {
+        if (set.has(value)) {
+          count++;
+        } else {
+          check = false;
+          break;
+        }
+      }
+    }
+    if (check && count == quest[index].ans.length) {
+      setarray(true, index);
+    } else {
+      setarray(false, index);
+    }
+  };
+  const checktextradiobox = e => {
+    e.preventDefault();
+    if (e.target.value == quest[index].ans) {
+      setarray(true, index);
+    } else {
+      setarray(false, index);
+    }
+    for (let i = 0; i < quest.length; i++) {
+      console.log(resultarray[i] + " " + i);
+    }
+    console.log(quest[index].ans);
+    console.log(e.target.value);
   };
   
   const onChange = event => {
     if (quest[index].type === "radio" || quest[index].type === "text") {
       state.answers[index] = event.target.value;
     } else {
-      
+
     }
     
     setState({
@@ -89,23 +103,6 @@ const Quiz = () => {
     });
     console.log(state.answers)
   };
-  const firecheckbox=(e)=>
-  {
-      if(state.answers[index]==undefined)
-      {
-        state.answers[index]={}
-      }
-
-      let val=""+e.target.value;
-      let check=e.target.checked;
-
-      state.answers[index][val]=check;
-      setState({
-        ...state
-      });
-      console.log(val+" :- "+check)
-      console.log(state.answers)
-  }
   return (
     <div className="condition">
       {showscore ? (
@@ -151,19 +148,22 @@ const Quiz = () => {
                 value={state.answers[index]}
                 placeholder="Enter your answer"
               />
-            ) : (quest[index].options.map(answeroption => (
+            ) : (
+              <form onSubmit={checkcheckbox} className="checkboxform">
+                {quest[index].options.map(answeroption => (
                   <div className="checkboxforminside">
                       <label>
                         <input
                         type="checkbox"
                         id={answeroption.id}
                         value={answeroption.text}
-                        checked={state.answers[index]!=undefined&&state.answers[index][answeroption.text]}
-                        onChange={firecheckbox}
+                        
                         />
                         {`      ${answeroption.text}`}</label>
                   </div>
-                ))
+                ))}
+                <button type="submit">Submit</button>
+              </form>
             )}
           </div>
           <div className="buttongroup">
